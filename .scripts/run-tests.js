@@ -20,20 +20,28 @@ function log(msg) {
   console.log(`--------- ${msg} ---------`);
 }
 
+function objectToEnvString (obj) {
+  let str = '';
+  for(let thisKey in obj) {
+    str += `${thisKey}=${obj[thisKey]} `;
+  }
+  return str;
+}
 function startProcess (cmd, args, opts, processCollector) {
   args = args || [];
   opts = opts || {};
   opts.env = opts.env || {};
+  opts.env.METEOR_PACKAGE_DIRS = PROJECT_PARENT_DIR;
+  opts.env.NODE_ENV = 'test';
+  const customEnv = Object.assign({}, opts.env);
   for(var thisKey in process.env) {
     opts.env[thisKey] = process.env[thisKey];
   }
-  opts.env.METEOR_PACKAGE_DIRS = PROJECT_PARENT_DIR;
-  opts.env.NODE_ENV = 'test';
   let fullCommandString = cmd;
   args.forEach((a) => {
     fullCommandString += ' ' + a;
   });
-  console.log(`(running: ${fullCommandString})`);
+  console.log(`(running: ${objectToEnvString(customEnv)} ${fullCommandString})`);
   const newProcess = spawn(cmd, args, opts);
   processCollector.push(newProcess);
 
