@@ -6,6 +6,15 @@
   "extends": [
     "standard"
   ],
+  "env": {
+    "mocha": true,
+    "node": true
+  },
+  "globals": {
+    "browser": true,
+    "server": true,
+    "expect": true
+  },
   "rules": {
     "callback-return": 2,
     "arrow-parens": 2,
