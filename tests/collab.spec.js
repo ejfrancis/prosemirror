@@ -23,7 +23,7 @@ describe('collab', function () {
     function getRootUrl () {
       return process.env.ROOT_URL;
     }
-    expect(this.server.instances[0].execute(getRootUrl)).to.equal(FIRST_APP_URL);
-    expect(this.server.instances[1].execute(getRootUrl)).to.equal(SECOND_APP_URL);
+    expect(this.servers.instances[0].execute(getRootUrl)).to.equal(FIRST_APP_URL);
+    expect(this.servers.instances[1].execute(getRootUrl)).to.equal(SECOND_APP_URL);
   });
 });
